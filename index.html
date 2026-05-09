@@ -1,0 +1,319 @@
+<html lang="EL"><head>
+<meta charset="UTF-8">
+<title>𝕸𝖚𝖘𝖎𝖈♥𝕮𝖍𝖔𝖎𝖈𝖊𝖘</title><style>
+.toggle-fullscreen-btn {
+	position: fixed;
+	z-index: 10000;
+	top: 10px;
+	right: 10px;
+	border: 0;
+	padding: 0;
+	background: none;
+	cursor: pointer;
+	outline: none;
+}
+
+
+.toggle-fullscreen-svg {
+	display: block;
+	height: auto;
+}
+
+.toggle-fullscreen-svg path {
+	transform-box: view-box;
+	transform-origin: 12px 12px;
+	fill: none;
+	stroke: hsl(225, 10%, 8%);
+	stroke-width: 4;
+	transition: .15s;
+}
+
+
+.toggle-fullscreen-btn:hover path:nth-child(1),
+.toggle-fullscreen-btn:focus path:nth-child(1) {
+	transform: translate(-2px, -2px);
+}
+
+.toggle-fullscreen-btn:hover path:nth-child(2),
+.toggle-fullscreen-btn:focus path:nth-child(2) {
+	transform: translate(2px, -2px);
+}
+
+.toggle-fullscreen-btn:hover path:nth-child(3),
+.toggle-fullscreen-btn:focus path:nth-child(3) {
+	transform: translate(2px, 2px);
+}
+
+.toggle-fullscreen-btn:hover path:nth-child(4),
+.toggle-fullscreen-btn:focus path:nth-child(4) {
+	transform: translate(-2px, 2px);
+}
+
+
+.toggle-fullscreen-btn:not(.on) .icon-fullscreen-leave {
+	display: none;
+}
+
+.toggle-fullscreen-btn.on .icon-fullscreen-enter {
+	display: none;
+}
+</style>
+
+  <script>
+  window.console = window.console || function(t) {};
+</script>
+
+  
+  
+  <script>
+  if (document.location.search.match(/type=embed/gi)) {
+    window.parent.postMessage("resize", "*");
+  }
+</script>
+
+
+<link rel="stylesheet" href="" />
+
+
+  <button class="js-toggle-fullscreen-btn toggle-fullscreen-btn" aria-label="Enter fullscreen mode">
+	<svg class="toggle-fullscreen-svg" width="28" height="28" viewbox="-2 -2 28 28">
+		<g class="icon-fullscreen-enter">
+			<path d="M 2 9 v -7 h 7"></path>
+			<path d="M 22 9 v -7 h -7"></path>
+			<path d="M 22 15 v 7 h -7"></path>
+			<path d="M 2 15 v 7 h 7"></path>
+		</g>
+		
+		<g class="icon-fullscreen-leave">
+			<path d="M 24 17 h -7 v 7"></path>
+			<path d="M 0 17 h 7 v 7"></path>
+			<path d="M 0 7 h 7 v -7"></path>
+			<path d="M 24 7 h -7 v -7"></path>
+		</g>
+	</svg>
+</button>
+    
+      <script id="rendered-js">
+if (document.fullscreenEnabled || document.webkitFullscreenEnabled) {
+  const toggleBtn = document.querySelector('.js-toggle-fullscreen-btn');
+
+  const styleEl = document.createElement('link');
+  styleEl.setAttribute('rel', 'stylesheet');
+  styleEl.setAttribute('href', '');
+  styleEl.addEventListener('load', function () {
+    toggleBtn.hidden = false;
+  });
+  document.head.appendChild(styleEl);
+
+  toggleBtn.addEventListener('click', function () {
+    if (document.fullscreen) {
+      document.exitFullscreen();
+    } else if (document.webkitFullscreenElement) {
+      document.webkitCancelFullScreen();
+    } else if (document.documentElement.requestFullscreen) {
+      document.documentElement.requestFullscreen();
+    } else {
+      document.documentElement.webkitRequestFullScreen();
+    }
+  });
+
+  document.addEventListener('fullscreenchange', handleFullscreen);
+  document.addEventListener('webkitfullscreenchange', handleFullscreen);
+
+
+  function handleFullscreen() {
+    if (document.fullscreen || document.webkitFullscreenElement) {
+      toggleBtn.classList.add('on');
+      toggleBtn.setAttribute('aria-label', 'Exit fullscreen mode');
+    } else {
+      toggleBtn.classList.remove('on');
+      toggleBtn.setAttribute('aria-label', 'Enter fullscreen mode');
+    }
+  }
+}
+//
+    </script>
+<style>
+body{
+  margin:0;
+  background:transparent;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  height:100vh;
+  overflow:hidden;
+}
+.container{
+  position:relative;
+  width:1308px;
+  height:484px;
+}
+
+/* =====  ===== */
+.video-wrapper{
+  position:absolute;
+  width:270px;
+  height:484px;
+  overflow:hidden;
+  z-index:1;
+  background:transparent;
+  border-radius:20px;
+}
+.left{left:0}
+.right{right:0}
+
+/* =====  ===== */
+.video-wrapper::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  padding:4px;
+  border-radius:20px;
+  background:conic-gradient(
+    red,orange,yellow,lime,cyan,blue,violet,red
+  );
+  -webkit-mask:
+    linear-gradient(#fff 0 0) content-box,
+    linear-gradient(#fff 0 0);
+  -webkit-mask-composite:xor;
+  mask-composite:exclude;
+  filter:drop-shadow(0 0 10px rgba(255,0,255,.7));
+  pointer-events:none;
+}
+
+/* =====  ===== */
+.side-video{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  border-radius:16px;
+}
+
+/* =====  ===== */
+.video-text{
+  position:absolute;
+  bottom:8px;
+  left:50%;
+  transform:translateX(-50%);
+  font-size:25px;
+  font-family:Trebuchet MS;
+  font-weight:bold;
+  z-index:2;
+  background:linear-gradient(90deg,red,orange,yellow,lime,cyan,blue,violet,red);
+  background-size:400% 100%;
+  -webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;
+  animation: rainbowText 3s linear infinite;
+}
+
+@keyframes rainbowText{
+  0%{background-position:0%}
+  100%{background-position:100%}
+}
+
+/* =====  ===== */
+.center-area{
+  position:absolute;
+  left:280px;
+  right:280px;
+  top:0;
+  bottom:0;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  pointer-events:none;
+  z-index:0;
+}
+
+/* =====  ===== */
+.center-box{
+  position:relative;
+  width:420px;
+  max-width:90%;
+  animation: fadeLoop 6s ease-in-out infinite;
+  filter:drop-shadow(0 0 25px rgba(255,0,0,.4));
+}
+
+.center-box img{
+  width:100%;
+  display:block;
+  border-radius:12px;
+}
+
+/* =====  ===== */
+.center-title{
+  position:absolute;
+  bottom:12px;
+  left:50%;
+  transform:translateX(-50%);
+  font-size:38px;
+  font-family:Trebuchet MS;
+  font-weight:900;
+  letter-spacing:3px;
+  color:#d8d8d8;
+
+  text-shadow:
+    0 1px 0 #fff,
+    0 2px 0 #cfcfcf,
+    0 3px 0 #b5b5b5,
+    0 4px 0 #9b9b9b,
+    0 6px 10px rgba(0,0,0,.8);
+
+  pointer-events:none;
+}
+
+/* =====  ===== */
+@keyframes fadeLoop{
+  0%{opacity:0}
+  20%{opacity:0}
+  50%{opacity:1}
+  80%{opacity:0}
+  100%{opacity:0}
+}
+</style>
+</head>
+<body>
+
+<div class="container">
+
+  <!--  -->
+  <div class="video-wrapper left">
+    <video class="side-video" autoplay="" loop="" muted="" playsinline="">
+      <source src="https://choises.github.io/hs/ne.mp4">
+    </video>
+    <div class="video-text">MUSIC CHOICES</div>
+  </div>
+
+  <!--  -->
+  <div class="video-wrapper right">
+    <video class="side-video" autoplay="" loop="" muted="" playsinline="">
+      <source src="https://choises.github.io/hs/ne.mp4">
+    </video>
+    <div class="video-text">ALL IS CHOICES</div>
+  </div>
+
+  <!--  -->
+  <div class="center-area">
+    <div class="center-box">
+      <img src="https://xatimg.com/image/wN0GwHPQejWO.png" alt="center">
+      <div class="center-title">CHOICES</div>
+    </div>
+  </div>
+<script>
+  function disableselect(e){
+     return false
+  }
+
+  function reEnable(){
+     return true
+  }
+
+//if IE4+
+   document.oncontextmenu=new Function ("return false")
+//if NS6
+  if (window.sidebar){
+     document.onmousedown=disableselect
+     document.onclick=reEnable
+}
+ </script>
+</div></body></html>
